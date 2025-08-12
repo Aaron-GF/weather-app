@@ -1,0 +1,6 @@
+/* To fix the Tailwind syntax warning (@theme) in .css file */
+{
+    "files.associations": {
+        "*.css": "tailwindcss" 
+    }
+}
