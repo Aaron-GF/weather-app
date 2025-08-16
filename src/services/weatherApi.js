@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { msToKmh } from "@/utils/utils";
 
-const getWeather = async (city = "madrid") => {
+const getWeather = async (city) => {
   const appId = process.env.NEXT_PUBLIC_API_KEY;
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`;
 
@@ -16,23 +16,26 @@ export const useWeather = () => {
 
   const searchWeatherByCity = async (city) => {
     const data = await getWeather(city);
+    console.log(data);
 
     setWeather({
       icon: data.weather[0].icon,
       description: data.weather[0].description,
-      temp: Math.round(data.main.temp),
-      feels_like: Math.round(data.main.feels_like),
-      temp_min: Math.round(data.main.temp_min),
-      temp_max: Math.round(data.main.temp_max),
+      temperature: {
+        temp: Math.round(data.main.temp),
+        feels_like: Math.round(data.main.feels_like),
+        temp_min: Math.round(data.main.temp_min),
+        temp_max: Math.round(data.main.temp_max),
+      },
       wind: {
-        speed: msToKmh(data.wind.speed), /* to get kilometres per hour */
-        deg: data.wind.deg
+        speed: msToKmh(data.wind.speed) /* to get kilometres per hour */,
+        deg: data.wind.deg,
       },
       humidity: data.main.humidity,
+      cloudiness: data.clouds.all,
       sunrise: data.sys.sunrise,
-      sunset: data.sys.sunset
+      sunset: data.sys.sunset,
     });
-    
   };
-  return {weather, searchWeatherByCity};
+  return { weather, searchWeatherByCity };
 };
