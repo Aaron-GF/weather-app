@@ -1,0 +1,1 @@
+export const msToKmh = ms => Math.round(ms * 3.6); /* To convert meters per second to kilometer per hour */
