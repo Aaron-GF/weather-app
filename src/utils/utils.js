@@ -3,21 +3,29 @@ export const msToKmh = (ms) => Math.round(ms * 3.6);
 
 /* to change backgrounds with the search */
 const weatherBackgrounds = {
-  "clear sky": {
+  Clear: {
     day: '/images/weather/sunny.jpg',
     night: '/images/weather/night.jpg',
   },
-  clouds: {
-    day: '/images/weather/sunny.jpg',
-    night: '/images/weather/night.jpg',
+  Clouds: {
+    day: '/images/weather/semi-cloud.jpg',
+    night: '/images/weather/semi-cloud-night.jpg',
   },
-  rain: {
-    day: '/images/weather/sunny.jpg',
-    night: '/images/weather/night.jpg',
+  Drizzle: {
+    day: '/images/weather/rain.jpg',
+    night: '/images/weather/rain-night.jpg',
   },
-  storm: {
-    day: '/images/weather/sunny.jpg',
-    night: '/images/weather/night.jpg',
+  Rain: {
+    day: '/images/weather/rain.jpg',
+    night: '/images/weather/rain-night.jpg',
+  },
+  Snow: {
+    day: '/images/weather/cloudy.jpg',
+    night: '/images/weather/cloudy-night.jpg',
+  },
+  Thunderstorm: {
+    day: '/images/weather/storm.jpg',
+    night: '/images/weather/storm-night.jpg',
   },
 };
 
@@ -27,13 +35,13 @@ export const isDayTime = (current, sunrise, sunset) => {
 }
 
 /* choose the correct image from bg with the description */
-export const BgFromDesc = (description, isDay) => {
-    if(!description) return "none";
+export const BgFromDesc = (main, isDay) => {
+    if(!main) return "none";
 
-    //search the first match on the keys
+    //get background
     for (const key of Object.keys(weatherBackgrounds)) {
-        if(description.includes(key)) {
-            return `url(${weatherBackgrounds[key][isDay ? "night" : "day"]})`;
+        if(weatherBackgrounds[main]) {
+            return `url(${weatherBackgrounds[main][isDay ? "day" : "night"]})`;
         }
     }
 }

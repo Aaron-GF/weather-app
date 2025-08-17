@@ -19,7 +19,9 @@ export const useWeather = () => {
     console.log(data);
 
     setWeather({
+      name: data.name,
       icon: data.weather[0].icon,
+      main: data.weather[0].main,
       description: data.weather[0].description,
       temperature: {
         temp: Math.round(data.main.temp),
@@ -33,6 +35,7 @@ export const useWeather = () => {
       },
       humidity: data.main.humidity,
       cloudiness: data.clouds.all,
+      dt: data.dt,
       sunrise: data.sys.sunrise,
       sunset: data.sys.sunset,
     });

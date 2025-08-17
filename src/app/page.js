@@ -1,36 +1,37 @@
 "use client";
 import { useWeather } from "@/services/weatherApi";
-import { useEffect } from "react";
+import { useState } from "react";
 import WeatherInfo from "@/components/WeatherInfo";
 import SearchBar from "@/components/SearchBar";
 import { BgFromDesc, isDayTime } from "@/utils/utils";
 
 export default function Home() {
   const { weather, searchWeatherByCity } = useWeather();
+  const [ city, setCity ] = useState("");
 
-  useEffect(() => {
-    searchWeatherByCity("londres");
-  }, []);
+  const handleSumit = async (e) => {
+    e.preventDefault();
+    searchWeatherByCity(city);
+  };
 
-  if(!weather) {
-    return <p>Loading weather...</p>
-  }
-
-  const bgImage = BgFromDesc(weather?.description, isDayTime(weather.dt, weather.sunrise, weather.sunset))
+ const bgImage = weather ? BgFromDesc(
+    weather?.main,
+    isDayTime(weather.dt, weather.sunrise, weather.sunset)
+  ) : null; // protect to the first render
 
   return (
     <div
+      className="flex flex-col justify-center items-center"
       style={{
         backgroundImage: bgImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
-        zIndex: 10,
         width: "100%",
       }}
     >
-      <SearchBar />
-      <WeatherInfo weather={weather} />
+      <SearchBar city={city} setCity={setCity} handleSumit={handleSumit} />
+      {weather && <WeatherInfo weather={weather} />}
     </div>
   );
 }
