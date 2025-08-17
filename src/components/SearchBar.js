@@ -3,7 +3,7 @@ import { FaSearchLocation, FaMapMarkerAlt } from "react-icons/fa";
 export default function SearchBar({ handleSumit, setCity, city }) {
   return (
     <form
-      className="flex gap-4 justify-between items-center rounded-xl border border-white/30 p-2 text-2xl"
+      className="flex gap-4 justify-between items-center rounded-4xl border border-white/30 px-3 py-2 text-xl m-10 bg-gray-700 fixed z-10 top-0"
       onSubmit={handleSumit}
     >
       <FaMapMarkerAlt />

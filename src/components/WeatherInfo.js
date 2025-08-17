@@ -1,30 +1,83 @@
+import { degToDir8 } from "@/utils/utils";
+
+import { FiWind } from "react-icons/fi";
+import { WiHumidity } from "react-icons/wi";
+import { FaTemperatureLow } from "react-icons/fa6";
+import { BsCloudsFill } from "react-icons/bs";
+
 export default function WeatherInfo({ weather }) {
   return (
-    <div
-      className="flex flex-col items-center justify-center relative w-1/2 h-1/2 p-10
-    bg-white/5 
-    backdrop-blur-sm 
-    rounded-2xl 
-    border border-white/30 
-    shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1)]
-    overflow-hidden
-    before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px 
-    before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent)]
-    after:content-[''] after:absolute after:top-0 after:left-0 after:w-px after:h-full
-    after:bg-[linear-gradient(180deg,rgba(255,255,255,0.8),transparent,rgba(255,255,255,0.3))]"
-    >
-      <h1>{weather.name}</h1>
-      <img
-        src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
-        className="h-50 w-50"
-      />
-      <p>{weather.description}</p>
-      <p>{weather.temperature.temp} ºC</p>
-      <p>Feels like {weather.temperature.feels_like} ºC</p>
-      <p>Max. Temperature {weather.temperature.temp_max} ºC</p>
-      <p>Speed wind {weather.wind.speed} Km/h</p>
-      <p>{weather.wind.direction}</p>
-      <p>Cloudiness {weather.cloudiness} %</p>
+    <div className="grid grid-cols-2 grid-rows-5 gap-4 w-1/2 mb-20 mt-40">
+      <div className="glass-effect col-span-2 row-span-2 p-10 flex flex-col items-center">
+        <h1 className="text-3xl">{weather.name}</h1>
+        <div className="flex items-center">
+          <img
+            src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
+            className="w-50"
+          />
+          <span className="text-8xl">{weather.temperature.temp}º</span>
+        </div>
+        <div className="flex gap-6">
+          <span>Max {weather.temperature.temp_max}º</span>
+          <span>Min {weather.temperature.temp_min}º</span>
+        </div>
+      </div>
+      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+          <FaTemperatureLow className="text-xl" />
+          FEELS LIKE
+        </h3>
+        <span className="text-6xl text-center">
+          {weather.temperature.feels_like}º
+        </span>
+        <span>Lorem insu</span>
+      </div>
+      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+          <BsCloudsFill className="text-xl" />
+          CLOUDINESS
+        </h3>
+        <span className="text-6xl text-center">{weather.cloudiness}%</span>
+        <span>Lorem insu</span>
+      </div>
+      <div className="glass-effect col-span-2 row-span-1 p-3">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+          <FiWind className="text-xl" />
+          WIND
+        </h3>
+        <div className="flex gap-80">
+          <div className="flex flex-col gap-2">
+            <span>Speed {weather.wind.speed} Km/h</span>
+            <span>
+              Direction {weather.wind.deg}º {degToDir8(weather.wind.deg)}
+            </span>
+          </div>
+          <span
+            className="inline text-9xl"
+            style={{
+              transform: `rotate(${weather.wind.deg}deg)`,
+            }}
+          >
+            ↑
+          </span>
+        </div>
+      </div>
+      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+        <h3 className="flex items-center text-sky-300 text-sm">
+          <WiHumidity className="text-3xl" />
+          HUMIDITY
+        </h3>
+        <span className="text-6xl text-center">{weather.humidity}%</span>
+        <span>Lorem insu</span>
+      </div>
+      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+        <h3 className="flex items-center text-sky-300 text-sm">
+          <WiHumidity className="text-3xl" />
+          DAYLIGHT
+        </h3>
+        <span className="text-6xl text-center">{weather.humidity}%</span>
+        <span>Lorem insu</span>
+      </div>
     </div>
   );
 }

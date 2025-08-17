@@ -45,3 +45,13 @@ export const BgFromDesc = (main, isDay) => {
         }
     }
 }
+
+/* get cardinal points with wind degrees direction */
+const DIR8_ES = ["N","NE","E","SE","S","SW","W","NW"];
+
+export const degToDir8 = deg => {
+  if(deg == null || Number.isNaN(deg)) return "-"
+  const d = ((deg % 360) + 360) % 360;
+  const idx = Math.round(d / 45) % 8; // 360 / 8(directions) = 45°
+  return DIR8_ES[idx]
+}

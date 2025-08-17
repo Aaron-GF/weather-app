@@ -11,7 +11,8 @@ export default function Home() {
 
   const handleSumit = async (e) => {
     e.preventDefault();
-    searchWeatherByCity(city);
+    await searchWeatherByCity(city);
+    window.scrollTo({ top:0, behavior: "smooth"}); // made scroll top then search city on searchbar
   };
 
  const bgImage = weather ? BgFromDesc(
@@ -21,7 +22,7 @@ export default function Home() {
 
   return (
     <div
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center bg-fixed"
       style={{
         backgroundImage: bgImage,
         backgroundSize: "cover",
