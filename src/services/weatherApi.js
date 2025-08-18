@@ -2,21 +2,16 @@
 import { useState } from "react";
 import { msToKmh } from "@/utils/utils";
 
-const getWeather = async (city) => {
-  const appId = process.env.NEXT_PUBLIC_API_KEY;
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`;
+const appId = process.env.NEXT_PUBLIC_API_KEY;
 
-  const res = await fetch(URL);
-  const data = await res.json();
-  return data;
-};
-
+/* call weather and set object to contain needed weather info*/
 export const useWeather = () => {
   const [weather, setWeather] = useState(null);
 
   const searchWeatherByCity = async (city) => {
-    const data = await getWeather(city);
-    console.log(data);
+    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`;
+    const res = await fetch(URL);
+    const data = await res.json();
 
     setWeather({
       name: data.name,
@@ -41,4 +36,24 @@ export const useWeather = () => {
     });
   };
   return { weather, searchWeatherByCity };
+};
+
+/* call suggestions and export to use on searchbar */
+export const useSuggestions = () => {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const getSuggestions = async (city) => {
+    const URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${appId}`;
+    const res = await fetch(URL);
+    const data = await res.json();
+
+    if(!Array.isArray(data)) { //Verify if data is an array
+      setSuggestions([]);
+      return;
+    }
+
+    setSuggestions([...new Set(data.map((item) => item.name))]); // Set to show only unique values
+  };
+
+  return { suggestions, getSuggestions };
 };

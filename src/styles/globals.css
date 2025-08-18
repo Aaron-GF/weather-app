@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@midudev/tailwind-animations";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -20,7 +22,7 @@
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(to bottom, #4a6ddc, #4a90e2, #5bc0eb);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;

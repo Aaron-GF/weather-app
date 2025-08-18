@@ -9,7 +9,7 @@ export default function Home() {
   const { weather, searchWeatherByCity } = useWeather();
   const [ city, setCity ] = useState("");
 
-  const handleSumit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await searchWeatherByCity(city);
     window.scrollTo({ top:0, behavior: "smooth"}); // made scroll top then search city on searchbar
@@ -31,7 +31,7 @@ export default function Home() {
         width: "100%",
       }}
     >
-      <SearchBar city={city} setCity={setCity} handleSumit={handleSumit} />
+      <SearchBar city={city} setCity={setCity} handleSubmit={handleSubmit} />
       {weather && <WeatherInfo weather={weather} />}
     </div>
   );
