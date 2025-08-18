@@ -1,40 +1,63 @@
-import { FaSearchLocation, FaMapMarkerAlt } from "react-icons/fa";
+import { useRef } from "react";
 import { useSuggestions } from "@/services/weatherApi";
+
+import { FaSearchLocation, FaMapMarkerAlt } from "react-icons/fa";
+import { TiDelete } from "react-icons/ti";
 
 export default function SearchBar({ handleSubmit, setCity, city }) {
   const { suggestions, getSuggestions } = useSuggestions();
 
+  const inputRef = useRef(null);
+
   return (
     <form
-      className="flex gap-4 justify-between items-center rounded-4xl border border-white/30 px-3 py-2 text-xl m-10 bg-gray-700 fixed z-10 top-0"
+      className="relative flex items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 top-0 w-1/4 min-w-3xs"
       onSubmit={(e) => {
         handleSubmit(e);
-        getSuggestions(''); // clean suggestions
-        setCity(''); // clean text on search
+        getSuggestions(""); // clean suggestions
+        setCity(""); // clean text on search
       }}
+      onClick={() => inputRef.current.focus()} // put cursor on input when clic in any place form
     >
-      <FaMapMarkerAlt />
+      <FaMapMarkerAlt className="text-xl" />
       <input
         type="text"
-        className="bg-transparent border-none outline-none w-full placeholder:text-white/50"
+        ref={inputRef}
+        className="bg-transparent ml-3 border-none outline-none placeholder:text-white/50"
         value={city}
+        size={city.length || 1}
         onChange={({ target }) => {
           setCity(target.value);
-          target.value ? getSuggestions(target.value) : getSuggestions('');
+          target.value ? getSuggestions(target.value) : getSuggestions("");
         }}
-        placeholder="Choose a place"
         required
       />
+      {/* Clear button */}
+      {city && (
+        <button
+          type="button"
+          className="cursor-pointer text-xl transition-transform hover:text-red-300 "
+          onClick={() => {
+            setCity("");
+            getSuggestions("");
+          }}
+        >
+          <TiDelete />
+        </button>
+      )}
+
+      {/* Dropdown suggestions */}
       {suggestions.length > 0 && (
-        <ul className="absolute top-full left-0 right-0 bg-gray-800 border border-white/30 rounded-xl text-sm mt-1">
+        <ul className="absolute top-full left-9 right-9 bg-gray-800 border border-white/30 rounded-xl text-sm mt-1">
           {suggestions.map((s, i) => (
-            <li 
+            <li
               key={i}
               className="p-2 rounded-xl hover:bg-gray-600 cursor-pointer"
               onClick={(e) => {
                 setCity(s); // complete input
-                getSuggestions(''); // clean dropdown
-                handleSubmit(e) // search on click
+                getSuggestions(""); // clean dropdown
+                handleSubmit(e); // search on click
+                setCity(""); // then clean text input
               }}
               type="submit"
             >
@@ -45,9 +68,9 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       )}
       <button
         type="submit"
-        className="bg-transparent border-none outline-none p-2 rounded-full cursor-pointer hover:bg-white/20"
+        className="bg-transparent ml-auto border-none outline-none p-2 rounded-full cursor-pointer hover:bg-white/20"
       >
-        <FaSearchLocation />
+        <FaSearchLocation className="text-xl" />
       </button>
     </form>
   );

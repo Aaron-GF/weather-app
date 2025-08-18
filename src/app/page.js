@@ -7,18 +7,22 @@ import { BgFromDesc, isDayTime } from "@/utils/utils";
 
 export default function Home() {
   const { weather, searchWeatherByCity } = useWeather();
-  const [ city, setCity ] = useState("");
+  const [city, setCity] = useState("");
+  const [fixed, setFixed] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await searchWeatherByCity(city);
-    window.scrollTo({ top:0, behavior: "smooth"}); // made scroll top then search city on searchbar
+    setFixed(true);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // made scroll top then search city on searchbar
   };
 
- const bgImage = weather ? BgFromDesc(
-    weather?.main,
-    isDayTime(weather.dt, weather.sunrise, weather.sunset)
-  ) : null; // protect to the first render
+  const bgImage = weather
+    ? BgFromDesc(
+        weather?.main,
+        isDayTime(weather.dt, weather.sunrise, weather.sunset)
+      )
+    : null; // protect to the first render
 
   return (
     <div
@@ -31,7 +35,15 @@ export default function Home() {
         width: "100%",
       }}
     >
-      <SearchBar city={city} setCity={setCity} handleSubmit={handleSubmit} />
+      <div
+        className={`w-full flex justify-center transition-all duration-500 ${
+          fixed
+            ? "fixed top-10 transform z-10"
+            : ""
+        }`}
+      >
+        <SearchBar city={city} setCity={setCity} handleSubmit={handleSubmit} />
+      </div>
       {weather && <WeatherInfo weather={weather} />}
     </div>
   );

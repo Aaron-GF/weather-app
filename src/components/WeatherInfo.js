@@ -58,7 +58,7 @@ export default function WeatherInfo({ weather }) {
               transform: `rotate(${weather.wind.deg}deg)`,
             }}
           >
-            ↑
+            <img src="/images/icons/arrow.png" alt="blue arrow" className="w-20" />
           </span>
         </div>
       </div>
