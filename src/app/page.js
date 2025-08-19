@@ -1,5 +1,5 @@
 "use client";
-import { useWeather } from "@/services/weatherApi";
+import { useWeather } from "@/hooks/index.js";
 import { useState } from "react";
 import WeatherInfo from "@/components/WeatherInfo";
 import SearchBar from "@/components/SearchBar";

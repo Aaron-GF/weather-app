@@ -2,15 +2,12 @@
 import { useState } from "react";
 import { msToKmh } from "@/utils/utils";
 
-const appId = process.env.NEXT_PUBLIC_API_KEY;
-
-/* call weather and set object to contain needed weather info*/
+/* set object to contain needed weather info*/
 export const useWeather = () => {
   const [weather, setWeather] = useState(null);
 
   const searchWeatherByCity = async (city) => {
-    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appId}&units=metric`;
-    const res = await fetch(URL);
+    const res = await fetch(`/api/weather?city=${city}`);
     const data = await res.json();
 
     setWeather({
@@ -25,7 +22,7 @@ export const useWeather = () => {
         temp_max: Math.round(data.main.temp_max),
       },
       wind: {
-        speed: msToKmh(data.wind.speed) /* to get kilometres per hour */,
+        speed: msToKmh(data.wind.speed) /* get kilometres per hour */,
         deg: data.wind.deg,
       },
       humidity: data.main.humidity,
@@ -38,22 +35,22 @@ export const useWeather = () => {
   return { weather, searchWeatherByCity };
 };
 
-/* call suggestions and export to use on searchbar */
+/* get suggestions and export to use on searchbar */
 export const useSuggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
 
-  const getSuggestions = async (city) => {
-    const URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${appId}`;
-    const res = await fetch(URL);
+  const showSuggestions = async (city) => {
+    const res = await fetch(`/api/suggestions?city=${city}`);
     const data = await res.json();
-
-    if(!Array.isArray(data)) { //Verify if data is an array
+    
+    if (!Array.isArray(data)) {
+      //Verify if data is an array
       setSuggestions([]);
       return;
     }
 
-    setSuggestions([...new Set(data.map((item) => item.name))]); // Set to show only unique values
-  };
+     setSuggestions([...new Set(data.map((item) => item.name))]); // Set to show only unique values
 
-  return { suggestions, getSuggestions };
+  };
+  return { suggestions, showSuggestions };
 };

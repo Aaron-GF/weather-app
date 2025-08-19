@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { useSuggestions } from "@/services/weatherApi";
+import { useSuggestions } from "@/hooks/index.js";
 
 import { FaSearchLocation, FaMapMarkerAlt } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 
 export default function SearchBar({ handleSubmit, setCity, city }) {
-  const { suggestions, getSuggestions } = useSuggestions();
+  const { suggestions, showSuggestions } = useSuggestions();
 
   const inputRef = useRef(null);
 
@@ -14,7 +14,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       className="relative flex items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 top-0 w-1/4 min-w-3xs"
       onSubmit={(e) => {
         handleSubmit(e);
-        getSuggestions(""); // clean suggestions
+        showSuggestions(""); // clean suggestions
         setCity(""); // clean text on search
       }}
       onClick={() => inputRef.current.focus()} // put cursor on input when clic in any place form
@@ -28,7 +28,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
         size={city.length || 1}
         onChange={({ target }) => {
           setCity(target.value);
-          target.value ? getSuggestions(target.value) : getSuggestions("");
+          target.value ? showSuggestions(target.value) : showSuggestions("");
         }}
         required
       />
@@ -39,7 +39,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
           className="cursor-pointer text-xl transition-transform hover:text-red-300 "
           onClick={() => {
             setCity("");
-            getSuggestions("");
+            showSuggestions("");
           }}
         >
           <TiDelete />
@@ -55,7 +55,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
               className="p-2 rounded-xl hover:bg-gray-600 cursor-pointer"
               onClick={(e) => {
                 setCity(s); // complete input
-                getSuggestions(""); // clean dropdown
+                showSuggestions(""); // clean dropdown
                 handleSubmit(e); // search on click
                 setCity(""); // then clean text input
               }}
