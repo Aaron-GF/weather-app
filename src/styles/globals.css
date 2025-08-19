@@ -34,8 +34,9 @@ body {
     relative
     cursor-crosshair 
   bg-white/5 
-    backdrop-blur-md
-    rounded-3xl 
+    backdrop-blur-sm
+    rounded-3xl
+    bg-gradient-to-b from-stone-950/50 
     shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1)]
     overflow-hidden
     before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px 
@@ -43,4 +44,9 @@ body {
     after:content-[''] after:absolute after:top-0 after:left-0 after:w-px after:h-full
     after:bg-[linear-gradient(180deg,rgba(255,255,255,0.8),transparent,rgba(255,255,255,0.3))]
     hover:scale-102 transition-transform
+}
+
+/* responsive */
+.responsive {
+  @apply text-5xl sm:text-6xl text-center
 }
