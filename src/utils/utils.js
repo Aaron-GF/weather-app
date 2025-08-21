@@ -27,6 +27,10 @@ const weatherBackgrounds = {
     day: '/images/weather/storm.jpg',
     night: '/images/weather/storm-night.jpg',
   },
+  Mist: {
+    day: '/images/weather/mist-d2.jpg',
+    night: '/images/weather/mist-n.jpg'
+  }
 };
 
 /* know if is day or night */
@@ -54,4 +58,15 @@ export const degToDir8 = deg => {
   const d = ((deg % 360) + 360) % 360;
   const idx = Math.round(d / 45) % 8; // 360 / 8(directions) = 45°
   return DIR8_ES[idx]
+}
+
+/* calculate dew point from temperature and humidity */
+export const dewPoint = (temp, hum) => {
+  const a = 17.27;
+  const b = 237.7;
+  
+  const alpha = (a * temp) / (b + temp) + Math.log(hum / 100);
+  const dewPoint = (b * alpha) / (a - alpha);
+
+  return Math.round(dewPoint * 10) / 10;
 }

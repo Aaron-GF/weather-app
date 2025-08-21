@@ -11,16 +11,16 @@ export default function WindCard({ weather }) {
       </h3>
       <div className="flex justify-around text-sm sm:text-base">
         <div className="flex flex-col gap-2 justify-center ">
-          <span>Speed {weather.wind.speed} Km/h</span>
+          <span><span className="text-orange-300">Speed</span> {weather.wind.speed} Km/h</span>
           <span>
-            Direction {weather.wind.deg}º {degToDir8(weather.wind.deg)}
+            <span className="text-orange-300">Direction</span> {weather.wind.deg}º {degToDir8(weather.wind.deg)}
           </span>
         </div>
         <div className="relative w-60 h-30 text-orange-300">
             <span className="absolute top-0 right-4/9">North</span>
             <span className="absolute bottom-0 right-4/9">South</span>
-            <span className="absolute left-0 top-4/10">West</span>
-            <span className="absolute right-1 top-4/10">East</span>
+            <span className="absolute left-2 top-4/10">West</span>
+            <span className="absolute right-8 top-4/10">East</span>
             <span
               className="flex absolute top-2/10 right-4/10"
               style={{

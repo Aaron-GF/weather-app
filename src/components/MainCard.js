@@ -11,10 +11,7 @@ export default function MainCard({ weather }) {
           {weather.temperature.temp}º
         </span>
       </div>
-      <div className="flex gap-6">
-        <span>Max {weather.temperature.temp_max}º</span>
-        <span>Min {weather.temperature.temp_min}º</span>
-      </div>
+        <span className="text-xl">{weather.description}</span>
     </div>
   );
 }

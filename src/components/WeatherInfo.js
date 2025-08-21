@@ -1,8 +1,9 @@
 import { WiHumidity } from "react-icons/wi";
-import { FaTemperatureLow } from "react-icons/fa6";
-import { BsCloudsFill } from "react-icons/bs";
+import { PiThermometerLight } from "react-icons/pi";
+import { BsCloudsFill, BsUmbrella } from "react-icons/bs";
 import WindCard from "@/components/WindCard";
 import MainCard from "@/components/MainCard";
+import { dewPoint } from "@/utils/utils";
 
 export default function WeatherInfo({ weather, forecast }) {
   return (
@@ -11,7 +12,7 @@ export default function WeatherInfo({ weather, forecast }) {
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
         <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
-          <FaTemperatureLow className="text-xl" />
+          <PiThermometerLight className="text-xl" />
           FEELS LIKE
         </h3>
         <span className="responsive">{weather.temperature.feels_like}º</span>
@@ -23,17 +24,17 @@ export default function WeatherInfo({ weather, forecast }) {
           <BsCloudsFill className="text-xl" />
           CLOUDINESS
         </h3>
-        <span className="responsive">{weather.cloudiness}%</span>
-        <span>Lorem insu</span>
+        <span className="responsive m-auto">{weather.cloudiness}%</span>
+        
       </div>
       <WindCard weather={weather} />
 
-      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
-        <h3 className="flex items-center text-sky-300 text-sm">
-          <WiHumidity className="text-3xl" />
+      <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+          <BsUmbrella className="text-xl" />
           RAIN PROBABILITY
         </h3>
-        <span className="responsive">{forecast.rain_probability}%</span>
+        <span className="responsive">{forecast.rain_probability * 100}%</span>
         <span>Lorem insu</span>
       </div>
 
@@ -43,7 +44,7 @@ export default function WeatherInfo({ weather, forecast }) {
           HUMIDITY
         </h3>
         <span className="responsive">{weather.humidity}%</span>
-        <span>Lorem insu</span>
+        <span className="pl-2">{`The dew point is ${dewPoint(weather.temperature.temp, weather.humidity)}º`}</span>
       </div>
     </div>
   );
