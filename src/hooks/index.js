@@ -35,6 +35,22 @@ export const useWeather = () => {
   return { weather, searchWeatherByCity };
 };
 
+/* get weather forecast */
+export const useForecast = () => {
+  const [forecast, setForecast] = useState(null);
+
+  const getForecast = async (city) => {
+    const res = await fetch(`/api/forecast?city=${city}`);
+    const data = await res.json();
+    console.log(data);
+
+    setForecast({
+      rain_probability: data.list[0].pop
+    })
+  }
+  return { forecast, getForecast };
+}
+
 /* get suggestions and export to use on searchbar */
 export const useSuggestions = () => {
   const [suggestions, setSuggestions] = useState([]);

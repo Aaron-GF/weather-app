@@ -17,10 +17,10 @@ export default function WindCard({ weather }) {
           </span>
         </div>
         <div className="relative w-60 h-30 text-orange-300">
-            <span className="absolute top-0 right-4/10">North</span>
-            <span className="absolute bottom-0 right-4/10">South</span>
-            <span className="absolute left-0 top-5/10">West</span>
-            <span className="absolute right-0 top-5/10">East</span>
+            <span className="absolute top-0 right-4/9">North</span>
+            <span className="absolute bottom-0 right-4/9">South</span>
+            <span className="absolute left-0 top-4/10">West</span>
+            <span className="absolute right-1 top-4/10">East</span>
             <span
               className="flex absolute top-2/10 right-4/10"
               style={{

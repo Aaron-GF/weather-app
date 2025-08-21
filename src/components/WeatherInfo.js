@@ -4,12 +4,12 @@ import { BsCloudsFill } from "react-icons/bs";
 import WindCard from "@/components/WindCard";
 import MainCard from "@/components/MainCard";
 
-export default function WeatherInfo({ weather }) {
+export default function WeatherInfo({ weather, forecast }) {
   return (
     <div className="grid grid-cols-2 grid-rows-5 gap-4 w-9/10 sm:w-1/2 mb-20 mt-40">
       <MainCard weather={weather}/>
 
-      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+      <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
         <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
           <FaTemperatureLow className="text-xl" />
           FEELS LIKE
@@ -18,7 +18,7 @@ export default function WeatherInfo({ weather }) {
         <span>Lorem insu</span>
       </div>
 
-      <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
+      <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
         <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
           <BsCloudsFill className="text-xl" />
           CLOUDINESS
@@ -31,16 +31,16 @@ export default function WeatherInfo({ weather }) {
       <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
         <h3 className="flex items-center text-sky-300 text-sm">
           <WiHumidity className="text-3xl" />
-          HUMIDITY
+          RAIN PROBABILITY
         </h3>
-        <span className="responsive">{weather.humidity}%</span>
+        <span className="responsive">{forecast.rain_probability}%</span>
         <span>Lorem insu</span>
       </div>
 
       <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
         <h3 className="flex items-center text-sky-300 text-sm">
           <WiHumidity className="text-3xl" />
-          DAYLIGHT
+          HUMIDITY
         </h3>
         <span className="responsive">{weather.humidity}%</span>
         <span>Lorem insu</span>

@@ -1,5 +1,5 @@
 "use client";
-import { useWeather } from "@/hooks/index.js";
+import { useWeather, useForecast } from "@/hooks/index.js";
 import { useState } from "react";
 import WeatherInfo from "@/components/WeatherInfo";
 import SearchBar from "@/components/SearchBar";
@@ -7,12 +7,14 @@ import { BgFromDesc, isDayTime } from "@/utils/utils";
 
 export default function Home() {
   const { weather, searchWeatherByCity } = useWeather();
+  const { forecast, getForecast } = useForecast();
   const [city, setCity] = useState("");
   const [fixed, setFixed] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await searchWeatherByCity(city);
+    await getForecast(city);
     setFixed(true);
     window.scrollTo({ top: 0, behavior: "smooth" }); // made scroll top then search city on searchbar
   };
@@ -44,7 +46,7 @@ export default function Home() {
       >
         <SearchBar city={city} setCity={setCity} handleSubmit={handleSubmit} />
       </div>
-      {weather && <WeatherInfo weather={weather} />}
+      {weather && forecast && <WeatherInfo weather={weather} forecast={forecast} />}
     </div>
   );
 }
