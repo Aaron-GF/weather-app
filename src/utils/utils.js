@@ -68,5 +68,5 @@ export const dewPoint = (temp, hum) => {
   const alpha = (a * temp) / (b + temp) + Math.log(hum / 100);
   const dewPoint = (b * alpha) / (a - alpha);
 
-  return Math.round(dewPoint * 10) / 10;
+  return Math.round((dewPoint * 10) / 10);
 }

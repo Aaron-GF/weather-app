@@ -11,7 +11,7 @@ export default function WeatherInfo({ weather, forecast }) {
       <MainCard weather={weather}/>
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
-        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-xs sm:text-sm">
           <PiThermometerLight className="text-xl" />
           FEELS LIKE
         </h3>
@@ -20,7 +20,7 @@ export default function WeatherInfo({ weather, forecast }) {
       </div>
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
-        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-xs sm:text-sm">
           <BsCloudsFill className="text-xl" />
           CLOUDINESS
         </h3>
@@ -30,21 +30,20 @@ export default function WeatherInfo({ weather, forecast }) {
       <WindCard weather={weather} />
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
-        <h3 className="flex gap-1.5 items-center text-sky-300 text-sm">
+        <h3 className="flex gap-1.5 items-center text-sky-300 text-xs sm:text-sm">
           <BsUmbrella className="text-xl" />
           RAIN PROBABILITY
         </h3>
-        <span className="responsive">{forecast.rain_probability * 100}%</span>
-        <span>Lorem insu</span>
+        <span className="responsive m-auto">{forecast.rain_probability * 100}%</span>
       </div>
 
       <div className="glass-effect col-span-1 row-span-1 p-2 flex flex-col justify-between">
-        <h3 className="flex items-center text-sky-300 text-sm">
+        <h3 className="flex items-center text-sky-300 text-xs sm:text-sm">
           <WiHumidity className="text-3xl" />
           HUMIDITY
         </h3>
         <span className="responsive">{weather.humidity}%</span>
-        <span className="pl-2">{`The dew point is ${dewPoint(weather.temperature.temp, weather.humidity)}º`}</span>
+        <span className="px-3 py-1 bg-gradient-to-r from-gray-700 to-transparent sm:to-80% rounded-xl text-xs sm:text-base">{`The dew point is ${dewPoint(weather.temperature.temp, weather.humidity)}º`}</span>
       </div>
     </div>
   );

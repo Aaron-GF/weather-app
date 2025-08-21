@@ -19,7 +19,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       }}
       onClick={() => inputRef.current.focus()} // put cursor on input when clic in any place form
     >
-      <FaMapMarkerAlt className="text-xl" />
+      <FaMapMarkerAlt className="text-xl hidden sm:block" />
       <input
         type="text"
         ref={inputRef}
