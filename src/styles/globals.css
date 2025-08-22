@@ -58,5 +58,5 @@ body {
 
 /* background mini-info cards */
 .mini-info {
-  @apply px-3 py-1 md:pr-30 bg-gradient-to-r from-gray-700 via-gray-700 sm:to-90%  rounded-xl text-xs sm:text-base 
+  @apply px-3 py-1 md:pr-30 bg-gradient-to-r from-gray-700 via-gray-700 sm:to-90%  rounded-xl md:text-sm 
 }
