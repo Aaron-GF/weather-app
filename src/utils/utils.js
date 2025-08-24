@@ -8,7 +8,7 @@ const weatherBackgrounds = {
     night: "/images/weather/night.jpg",
   },
   Clouds: {
-    day: "/images/weather/semi-cloud.jpg",
+    day: "/gifs/few-clouds-day.gif",
     night: "/images/weather/semi-cloud-night.jpg",
   },
   Drizzle: {
@@ -16,7 +16,7 @@ const weatherBackgrounds = {
     night: "/images/weather/rain-night.jpg",
   },
   Rain: {
-    day: "/images/weather/rain.jpg",
+    day: "/gifs/rain-day.gif",
     night: "/images/weather/rain-night.jpg",
   },
   Snow: {

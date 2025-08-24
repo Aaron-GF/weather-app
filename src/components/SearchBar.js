@@ -11,7 +11,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
 
   return (
     <form
-      className="relative flex items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 top-0 w-1/4 min-w-3xs animate-fade-in"
+      className="relative flex items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 w-1/4 min-w-3xs animate-fade-in"
       onSubmit={(e) => {
         handleSubmit(e);
         showSuggestions(""); // clean suggestions
