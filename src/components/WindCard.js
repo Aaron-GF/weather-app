@@ -17,8 +17,8 @@ export default function WindCard({ weather }) {
           </span>
         </div>
         <div className="relative w-60 h-30 text-orange-300 md:mr-10">
-            <span className="pointStyles top-2 sm:top-0 right-3/9 sm:right-4/10">North</span>
-            <span className="pointStyles bottom-3 sm:bottom-0 right-3/9 sm:right-4/10">South</span>
+            <span className="pointStyles top-2 sm:top-0 right-3/9 sm:right-4/11">North</span>
+            <span className="pointStyles bottom-3 sm:bottom-0 right-3/9 sm:right-4/11">South</span>
             <span className="pointStyles left-1 top-4/10 ">West</span>
             <span className="pointStyles right-2 top-4/10 ">East</span>
             <span
