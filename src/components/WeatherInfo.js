@@ -15,7 +15,7 @@ export default function WeatherInfo({ weather, forecast }) {
   const { message, color, formatted } = diference(weather.temperature.feels_like, weather.temperature.temp);
 
   return (
-    <div className="grid grid-cols-2 grid-rows-5 gap-4 w-9/10 sm:w-1/2 mb-20 mt-40">
+    <div className="grid grid-cols-2 grid-rows-5 gap-4 w-9/10 sm:w-1/2 mb-20 mt-40 animate-blurred-fade-in">
       <MainCard weather={weather}/>
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">

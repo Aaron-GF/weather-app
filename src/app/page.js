@@ -7,18 +7,23 @@ import SearchBar from "@/components/SearchBar";
 
 import { BgFromDesc, isDayTime } from "@/utils/utils";
 
+import { CircularProgress, Box } from "@mui/material";
+
 export default function Home() {
   const { weather, searchWeatherByCity } = useWeather();
   const { forecast, getForecast } = useForecast();
 
   const [city, setCity] = useState("");
   const [fixed, setFixed] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     await searchWeatherByCity(city);
     await getForecast(city);
-    setFixed(true);   
+    setLoading(false);
+    setFixed(true);
     window.scrollTo({ top: 0, behavior: "smooth" }); // made scroll top then search city on searchbar
   };
 
@@ -48,7 +53,15 @@ export default function Home() {
         <SearchBar city={city} setCity={setCity} handleSubmit={handleSubmit} />
       </div>
 
-      {weather && forecast && (
+      {loading && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <Box>
+            <CircularProgress size={50} color="inherit"/>
+          </Box>
+        </div>
+      )}
+
+      {!loading && weather && forecast && (
         <WeatherInfo weather={weather} forecast={forecast} />
       )}
     </div>
