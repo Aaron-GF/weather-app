@@ -23,7 +23,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       <input
         type="text"
         ref={inputRef}
-        className="bg-transparent ml-4 border-none outline-none placeholder:text-white/50"
+        className="bg-transparent ml-4 border-none outline-none placeholder:text-white/50 z-10"
         value={city}
         size={city.length || 1}
         onChange={({ target }) => {

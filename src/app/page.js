@@ -30,7 +30,8 @@ export default function Home() {
   const bg = weather
     ? BgFromDesc(
         weather?.main,
-        isDayTime(weather.dt, weather.sunrise, weather.sunset)
+        isDayTime(weather.dt, weather.sunrise, weather.sunset),
+        weather?.cloudiness
       )
     : null; // protect to the first render
 
@@ -38,6 +39,12 @@ export default function Home() {
     <div className="relative w-full min-h-screen">
       {/* Content on the background */}
       <div className="relative z-10 flex flex-col justify-center items-center min-h-screen">
+        {!bg && (
+          <div className="text-center p-2 md:p-4 m-2 rounded-2xl animate-zoom-in  font-bold bg-gradient-app">
+            <h1 className="text-sky-100 m-2 text-xl">WEATHER</h1>
+            <p className="mini-info">Find your location to know the weather</p>
+          </div>
+        )}
         {/* Searchbar */}
         <div
           className={`w-full flex justify-center transition-all duration-500 ${

@@ -9,10 +9,10 @@ export const useWeather = () => {
   const searchWeatherByCity = async (city) => {
     const res = await fetch(`/api/weather?city=${city}`);
     const data = await res.json();
+    console.log(data);
 
     if (data.cod === "404") {
       window.alert("The location could not be found, check the name or try another");
-      setWeather(null);
       return;
     }
 
@@ -50,7 +50,6 @@ export const useForecast = () => {
     const data = await res.json();
 
     if (data.cod === "404") {
-      setForecast(null);
       return;
     }
 

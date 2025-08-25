@@ -8,11 +8,11 @@ const weatherBackgrounds = {
     night: "/images/weather/night.jpg",
   },
   CloudsLow: {
-    day: "/videos/few-clouds-day.gif",
+    day: "/videos/few-clouds-day.mp4",
     night: "/images/weather/semi-cloud-night.jpg",
   },
   CloudsHigh: {
-    day: "/videos/mist-day.mp4",
+    day: "/videos/sky-clouds-day.mp4",
     night: "/videos/sky-clouds-night.mp4"
   },
   Drizzle: {
@@ -24,12 +24,12 @@ const weatherBackgrounds = {
     night: "/videos/drop-rain-night.mp4",
   },
   Snow: {
-    day: "/images/weather/cloudy.jpg",
-    night: "/images/weather/cloudy-night.jpg",
+    day: "/videos/falling-snow-day.mp4",
+    night: "/videos/falling-snow-night.mp4",
   },
   Thunderstorm: {
-    day: "/videos/mist-night.mp4",
-    night: "/images/weather/storm-night.jpg",
+    day: "/videos/thunderstorm.mp4",
+    night: "/videos/thunderstorm.mp4",
   },
   Mist: {
     day: "/videos/mist-day.mp4",
