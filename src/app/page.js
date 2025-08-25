@@ -27,7 +27,7 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" }); // made scroll top then search city on searchbar
   };
 
-  const bgImage = weather
+  const bg = weather
     ? BgFromDesc(
         weather?.main,
         isDayTime(weather.dt, weather.sunrise, weather.sunset)
@@ -36,16 +36,6 @@ export default function Home() {
 
   return (
     <div className="relative w-full min-h-screen">
-      {/* Fixed background */}
-      <div
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: bgImage,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      ></div>
-
       {/* Content on the background */}
       <div className="relative z-10 flex flex-col justify-center items-center min-h-screen">
         {/* Searchbar */}
@@ -60,6 +50,27 @@ export default function Home() {
             handleSubmit={handleSubmit}
           />
         </div>
+
+        {/* Render fixed background image or video*/}
+        {bg && bg.type === "video" && (
+          <video
+            key={bg.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="fixed inset-0 w-full h-full object-cover -z-10"
+          >
+            <source src={bg.src} type="video/mp4" />
+          </video>
+        )}
+
+        {bg && bg.type === "image" && (
+          <div
+            className="fixed inset-0 w-full h-full bg-cover bg-center -z-10"
+            style={{ backgroundImage: `url(${bg.src})` }}
+          />
+        )}
 
         {/* Spinner fullscreen progressbar */}
         {loading && (

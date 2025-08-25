@@ -7,29 +7,33 @@ const weatherBackgrounds = {
     day: "/images/weather/sunny.jpg",
     night: "/images/weather/night.jpg",
   },
-  Clouds: {
-    day: "/gifs/few-clouds-day.gif",
+  CloudsLow: {
+    day: "/videos/few-clouds-day.gif",
     night: "/images/weather/semi-cloud-night.jpg",
   },
+  CloudsHigh: {
+    day: "/videos/mist-day.mp4",
+    night: "/videos/sky-clouds-night.mp4"
+  },
   Drizzle: {
-    day: "/images/weather/rain.jpg",
+    day: "/videos/drop-rain.mp4",
     night: "/images/weather/rain-night.jpg",
   },
   Rain: {
-    day: "/gifs/rain-day.gif",
-    night: "/images/weather/rain-night.jpg",
+    day: "/videos/drop-rain.mp4",
+    night: "/videos/drop-rain-night.mp4",
   },
   Snow: {
     day: "/images/weather/cloudy.jpg",
     night: "/images/weather/cloudy-night.jpg",
   },
   Thunderstorm: {
-    day: "/images/weather/storm.jpg",
+    day: "/videos/mist-night.mp4",
     night: "/images/weather/storm-night.jpg",
   },
   Mist: {
-    day: "/images/weather/mist-d2.jpg",
-    night: "/images/weather/mist-n.jpg",
+    day: "/videos/mist-day.mp4",
+    night: "/videos/mist-night.mp4",
   },
 };
 
@@ -39,15 +43,23 @@ export const isDayTime = (current, sunrise, sunset) => {
 };
 
 /* choose the correct image from bg with the description */
-export const BgFromDesc = (main, isDay) => {
-  if (!main) return "none";
+export const BgFromDesc = (main, isDay, clouds = 0) => {
+  if (!main) return null;
 
-  //get background
-  for (const key of Object.keys(weatherBackgrounds)) {
-    if (weatherBackgrounds[main]) {
-      return `url(${weatherBackgrounds[main][isDay ? "day" : "night"]})`;
-    }
+  let key = main;
+
+  if (main === "Clouds") {
+    key = clouds < 50 ? "CloudsLow" : "CloudsHigh";
   }
+
+  const bg = weatherBackgrounds[key]?.[isDay ? "day" : "night"];
+  if (!bg) return null;
+
+  // check type of extension
+  const extension = bg.split(".").pop().toLowerCase();
+  const type = ["mp4", "webm"].includes(extension) ? "video" : "image";
+
+  return { src: bg, type };
 };
 
 /* get cardinal points with wind degrees direction */
