@@ -1,8 +1,8 @@
 export default function MainCard({ weather }) {
   return (
     <div className="glass-effect col-span-2 row-span-2 p-10 flex flex-col items-center">
-      <h1 className="text-3xl text-sky-300 drop-shadow-md/50">{weather.name}</h1>
-      <div className="md:flex items-center">
+      <h1 className="text-3xl text-sky-300 drop-shadow-md/50 text-center">{weather.name}</h1>
+      <div className="xl:flex items-center">
         <img
           src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
           className="w-30 sm:w-50"

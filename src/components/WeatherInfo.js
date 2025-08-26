@@ -28,7 +28,7 @@ export default function WeatherInfo({ weather, forecast }) {
         </h3>
         <span className="responsive">{weather.temperature.feels_like}º</span>
         <span className="mini-info text-xs">
-          It feels <span className={color}>{message}</span> than the actual
+          It feels <span className={color}>{message}</span> as the actual
           temperture<span className={color}> {formatted}</span>
         </span>
       </div>
@@ -58,7 +58,7 @@ export default function WeatherInfo({ weather, forecast }) {
           HUMIDITY
         </h3>
         <span className="responsive">{weather.humidity}%</span>
-        <span className="px-3 py-1 bg-gradient-to-r from-gray-700 to-transparent sm:to-80% rounded-xl text-xs sm:text-base">{`The dew point is ${dewPoint(
+        <span className="mini-info text-xs">{`The dew point is ${dewPoint(
           weather.temperature.temp,
           weather.humidity
         )}º`}</span>

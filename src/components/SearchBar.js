@@ -9,9 +9,12 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
 
   const inputRef = useRef(null);
 
+  const formRef = useRef(null);
+
   return (
     <form
-      className="relative flex items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 w-1/4 min-w-3xs animate-fade-in"
+      ref={formRef}
+      className="relative flex gap-2 items-center rounded-4xl cursor-pointer border border-white/30 px-3 py-2 bg-gray-700 w-9/10 max-w-xs mx-auto animate-fade-in"
       onSubmit={(e) => {
         handleSubmit(e);
         showSuggestions(""); // clean suggestions
@@ -19,24 +22,13 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       }}
       onClick={() => inputRef.current.focus()} // put cursor on input when clic in any place form
     >
-      <FaMapMarkerAlt className="text-xl hidden sm:block" />
-      <input
-        type="text"
-        ref={inputRef}
-        className="bg-transparent ml-4 border-none outline-none placeholder:text-white/50 z-10"
-        value={city}
-        size={city.length || 1}
-        onChange={({ target }) => {
-          setCity(target.value);
-          target.value ? showSuggestions(target.value) : showSuggestions("");
-        }}
-        required
-      />
+      {!city && <FaMapMarkerAlt className="text-xl absolute" />}
+
       {/* Clear button */}
       {city && (
         <button
           type="button"
-          className="cursor-pointer text-xl transition-transform hover:text-red-300 "
+          className="absolute cursor-pointer text-2xl transition-transform hover:text-red-300 "
           onClick={() => {
             setCity("");
             showSuggestions("");
@@ -45,6 +37,20 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
           <TiDelete />
         </button>
       )}
+
+      <input
+        type="search"
+        ref={inputRef}
+        className="absolute ml-8 bg-transparent border-none outline-none placeholder:text-white/50"
+        value={city}
+        onChange={({ target }) => {
+          setCity(target.value);
+          target.value ? showSuggestions(target.value) : showSuggestions("");
+        }}
+        required
+        autoFocus
+        autoComplete="city"
+      />
 
       {/* Dropdown suggestions */}
       {suggestions.length > 0 && (
@@ -56,21 +62,19 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
               onClick={(e) => {
                 setCity(s); // complete input
                 showSuggestions(""); // clean dropdown
-                handleSubmit(e); // search on click
-                setCity(""); // then clean text input
+                formRef.current?.requestSubmit(); // run form submit
               }}
-              type="submit"
             >
               {s}
             </li>
           ))}
         </ul>
-      )}
+      )} 
       <button
         type="submit"
         className="bg-transparent ml-auto border-none outline-none p-2 rounded-full cursor-pointer hover:bg-white/20"
       >
-        <FaSearchLocation className="text-xl" />
+        <FaSearchLocation className="text-xl ab" />
       </button>
     </form>
   );

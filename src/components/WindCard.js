@@ -5,7 +5,7 @@ import { FiWind } from "react-icons/fi";
 export default function WindCard({ weather }) {
   return (
     <div className="glass-effect col-span-2 row-span-1 p-3 flex flex-col">
-      <h3 className="flex gap-1.5 items-center text-sky-300 text-xs sm:text-sm">
+      <h3 className="info-head">
         <FiWind className="text-xl" />
         WIND
       </h3>
