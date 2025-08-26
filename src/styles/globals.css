@@ -5,6 +5,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --app-color1: #4a6ddc;
+  --app-color2: #4a90e2;
+  --app-color3: #5bc0eb;
 }
 
 @theme inline {
@@ -27,44 +30,64 @@ body {
   background-size: cover;
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   box-sizing: border-box;
+}
+
+/* background pattern main info */
+.bg-pattern {
+  /* Dark mode colors and gradient */
+  background: #121212; /* Fallback for browsers that don't support gradients */
+  background: linear-gradient(
+    135deg,
+    #121212 25%,
+    #1a1a1a 25%,
+    #1a1a1a 50%,
+    #121212 50%,
+    #121212 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 40px 40px;
+
+  /* Animation */
+  animation: move 4s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
 }
 
 /* glassmorphism */
 .glass-effect {
-  @apply 
-    relative
-    cursor-crosshair 
-  bg-white/5 
-    backdrop-blur-sm
-    rounded-3xl
-    bg-gradient-to-b from-stone-950/50 
-    shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.1)]
-    overflow-hidden
-    before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px 
-    before:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent)]
-    after:content-[''] after:absolute after:top-0 after:left-0 after:w-px after:h-full
-    after:bg-[linear-gradient(180deg,rgba(255,255,255,0.8),transparent,rgba(255,255,255,0.3))]
-    hover:scale-102 transition-transform
+  background: linear-gradient(to bottom, rgba(12,10,9,0.2) 20%, rgba(255, 255, 255, 0.1) 40%);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* responsive */
 .responsive {
-  @apply text-4xl md:text-6xl text-center drop-shadow-md/50
+  @apply text-4xl md:text-6xl text-center drop-shadow-md/50;
 }
 
 /* direcctions styles */
 .pointStyles {
-  @apply absolute bg-gray-700 rounded-md px-3
+  @apply absolute bg-gray-700 rounded-md px-3;
 }
 
 /* background mini-info cards */
 .mini-info {
-  @apply px-3 py-1 md:pr-30 bg-gradient-to-r from-gray-700 via-gray-700 sm:to-90%  rounded-xl md:text-sm 
+  @apply px-3 py-1 md:pr-30 bg-gradient-to-r from-gray-700 via-gray-700 sm:to-90%  rounded-xl md:text-sm;
 }
 
-/* background gradient with the app logo colors */
-.bg-gradient-app {
-  @apply bg-gradient-to-b from-[#4a6ddc]/90 via-[#4a90e2]/60 to-[#5bc0eb]/30
+.info-head {
+  @apply flex gap-1.5 items-center text-sky-300 text-xs sm:text-sm drop-shadow-sm/50
 }

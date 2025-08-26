@@ -40,9 +40,9 @@ export default function Home() {
       {/* Content on the background */}
       <div className="relative z-10 flex flex-col justify-center items-center min-h-screen">
         {!bg && (
-          <div className="text-center p-2 md:p-4 m-2 rounded-2xl animate-zoom-in  font-bold bg-gradient-app">
+          <div className="flex flex-col items-center justify-center text-center p-2 md:p-4 m-2 rounded-2xl animate-zoom-in bg-pattern opacity-80">
             <h1 className="text-sky-100 m-2 text-xl">WEATHER</h1>
-            <p className="mini-info">Find your location to know the weather</p>
+            <p className="mini-info font-mono">Find your location to know the weather</p>
           </div>
         )}
         {/* Searchbar */}
