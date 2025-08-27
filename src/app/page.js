@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useWeather, useForecast } from "@/hooks/index.js";
+import { useWeather } from "@/hooks/useWeather";
+import { useForecast } from "@/hooks/useForecast";
 
 import WeatherInfo from "@/components/WeatherInfo";
 import SearchBar from "@/components/SearchBar";
@@ -10,18 +11,28 @@ import { BgFromDesc, isDayTime } from "@/utils/utils";
 import { CircularProgress, Box } from "@mui/material";
 
 export default function Home() {
-  const { weather, searchWeatherByCity } = useWeather();
+  const { weather, searchWeatherByCity, searchWeatherByCoords } = useWeather();
   const { forecast, getForecast } = useForecast();
 
   const [city, setCity] = useState("");
   const [fixed, setFixed] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e, coords) => {
+    e?.preventDefault();
     setLoading(true);
-    await searchWeatherByCity(city);
-    await getForecast(city);
+
+    if (coords) {
+      const cityByCoords = await searchWeatherByCoords(
+        coords.latitude,
+        coords.longitude
+      );
+      await searchWeatherByCity(cityByCoords);
+      await getForecast(cityByCoords);
+    } else {
+      await searchWeatherByCity(city);
+      await getForecast(city);
+    }
     setLoading(false);
     setFixed(true);
     window.scrollTo({ top: 0, behavior: "smooth" }); // made scroll top then search city on searchbar
@@ -42,7 +53,9 @@ export default function Home() {
         {!bg && (
           <div className="flex flex-col items-center justify-center text-center p-2 md:p-4 m-2 rounded-2xl animate-zoom-in bg-pattern opacity-80">
             <h1 className="text-sky-100 m-2 text-xl">WEATHER</h1>
-            <p className="mini-info font-mono">Find your location to know the weather</p>
+            <p className="mini-info font-mono">
+              Find your location to know the weather
+            </p>
           </div>
         )}
         {/* Searchbar */}

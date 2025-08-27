@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { useSuggestions } from "@/hooks/index.js";
+import { useSuggestions } from "@/hooks/useSuggestions";
 
 import { FaSearchLocation, FaMapMarkerAlt } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
+import { BiCurrentLocation } from "react-icons/bi";
 
 export default function SearchBar({ handleSubmit, setCity, city }) {
   const { suggestions, showSuggestions } = useSuggestions();
@@ -54,6 +55,20 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       {/* Dropdown suggestions */}
       {suggestions.length > 0 && (
         <ul className="absolute top-full left-9 right-9 bg-gray-800 border border-white/30 rounded-xl text-sm mt-1">
+          <li
+            className="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-600 cursor-pointer"
+            onClick={() => {
+              navigator.geolocation.getCurrentPosition(({ coords }) => {
+                handleSubmit(null, coords);
+              });
+              showSuggestions([]);
+              setCity("");
+            }}
+          >
+            <BiCurrentLocation className="text-lg" />
+            Your current location
+          </li>
+          <hr></hr>
           {suggestions.map((s, i) => (
             <li
               key={i}
@@ -68,7 +83,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
             </li>
           ))}
         </ul>
-      )} 
+      )}
       <button
         type="submit"
         className="bg-transparent ml-auto border-none outline-none p-2 rounded-full cursor-pointer hover:bg-white/20"
