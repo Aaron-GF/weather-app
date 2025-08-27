@@ -86,7 +86,7 @@ export const dewPoint = (temp, hum) => {
 /* feels like diference */
 export const diference = (feels, current) => {
   const diff = Number(feels) - Number(current);
-  const formatted = diff === 0 ? "" : diff > 0 ? `+${diff}` : `${diff}`;
+  const formatted = diff === 0 ? "" : diff > 0 ? `+${diff}º` : `${diff}º`;
 
   const message = diff > 0 ? "warmer" : diff < 0 ? "cooler" : "the same";
   const color =

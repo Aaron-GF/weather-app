@@ -12,7 +12,9 @@ export const useWeather = () => {
     console.log(data);
 
     if (data.cod === "404") {
-      window.alert("The location could not be found, check the name or try another");
+      window.alert(
+        "The location could not be found, check the name or try another"
+      );
       return;
     }
 
@@ -54,11 +56,11 @@ export const useForecast = () => {
     }
 
     setForecast({
-      rain_probability: data.list[0].pop
-    })
-  }
+      rain_probability: data.list[0].pop,
+    });
+  };
   return { forecast, getForecast };
-}
+};
 
 /* get suggestions and export to use on searchbar */
 export const useSuggestions = () => {
@@ -67,15 +69,33 @@ export const useSuggestions = () => {
   const showSuggestions = async (city) => {
     const res = await fetch(`/api/suggestions?city=${city}`);
     const data = await res.json();
-    
+    console.log(data);
+
     if (!Array.isArray(data)) {
       //Verify if data is an array
       setSuggestions([]);
       return;
     }
 
-     setSuggestions([...new Set(data.map((item) => item.name))]); // Set to show only unique values
+    const grouped = Array.from(
+      data
+        .reduce((map, item) => {
+          const key = `${item.name}-${item.country}`;
+          if (!map.has(key)) map.set(key, item);
+          return map;
+        }, new Map())
+        .values()
+    );
 
+    setSuggestions(
+      grouped.map((item) => ({
+        label: `${item.name}, ${item.state ? item.state + ", " : ""}${
+          item.country
+        }`,
+        value: item,
+      }))
+    );
   };
+
   return { suggestions, showSuggestions };
 };

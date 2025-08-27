@@ -18,7 +18,6 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
       onSubmit={(e) => {
         handleSubmit(e);
         showSuggestions(""); // clean suggestions
-        setCity(""); // clean text on search
       }}
       onClick={() => inputRef.current.focus()} // put cursor on input when clic in any place form
     >
@@ -31,7 +30,7 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
           className="absolute cursor-pointer text-2xl transition-transform hover:text-red-300 "
           onClick={() => {
             setCity("");
-            showSuggestions("");
+            showSuggestions([]);
           }}
         >
           <TiDelete />
@@ -60,12 +59,12 @@ export default function SearchBar({ handleSubmit, setCity, city }) {
               key={i}
               className="p-2 rounded-xl hover:bg-gray-600 cursor-pointer"
               onClick={(e) => {
-                setCity(s); // complete input
-                showSuggestions(""); // clean dropdown
+                setCity(s.label); // complete input
+                showSuggestions([]); // clean dropdown
                 formRef.current?.requestSubmit(); // run form submit
               }}
             >
-              {s}
+              {s.label}
             </li>
           ))}
         </ul>
