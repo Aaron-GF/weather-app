@@ -14,6 +14,7 @@ The app displays detailed information such as:
 - Wind speed and direction 🌬️  
 - Humidity 💧  
 - Cloudiness ☁️  
+- Forecast 5-day 📅
 
 
 ## 🚀 Installation

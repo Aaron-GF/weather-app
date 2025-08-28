@@ -5,7 +5,7 @@ export default function MainCard({ weather }) {
       <div className="xl:flex items-center">
         <img
           src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
-          className="w-30 sm:w-50"
+          className="w-30 sm:w-50 drop-shadow-md/60"
         />
         <span className="text-6xl md:text-8xl flex justify-center drop-shadow-md/50">
           {weather.temperature.temp}º
