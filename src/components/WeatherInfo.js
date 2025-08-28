@@ -10,6 +10,7 @@ import MainCard from "@/components/MainCard";
 /* functions */
 import { dewPoint } from "@/utils/utils";
 import { diference } from "@/utils/utils";
+import ForecastFiveDays from "./ForecastFiveDays";
 
 export default function WeatherInfo({ weather, forecast }) {
   const { message, color, formatted } = diference(
@@ -18,8 +19,11 @@ export default function WeatherInfo({ weather, forecast }) {
   );
 
   return (
-    <div className="grid grid-cols-2 grid-rows-5 gap-4 w-9/10 sm:w-1/2 mb-20 mt-40 animate-blurred-fade-in">
+    <div className="grid grid-cols-2 grid-rows-6 gap-4 w-9/10 sm:w-1/2 mb-20 mt-40 animate-blurred-fade-in">
+
       <MainCard weather={weather} />
+
+      <ForecastFiveDays forecast={forecast} />
 
       <div className="glass-effect col-span-1 row-span-1 p-3 flex flex-col justify-between">
         <h3 className="info-head">

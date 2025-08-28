@@ -43,6 +43,7 @@ The app will be available at http://localhost:3000.
 - [Material UI](https://mui.com/) – UI components
 - [React Icons](https://react-icons.github.io/react-icons/) – Icons
 - [@midudev/tailwind-animations](https://tailwindcss-animations.vercel.app/) - Animations
+- [Open weather API](https://openweathermap.org/api)
 
 
 ## 🌐 Demo

@@ -8,6 +8,7 @@ export const useForecast = () => {
   const getForecast = async (city) => {
     const res = await fetch(`/api/forecast?city=${city}`);
     const data = await res.json();
+    console.log(data);
 
     if (data.cod === "404") {
       return;
@@ -15,6 +16,7 @@ export const useForecast = () => {
 
     setForecast({
       rain_probability: data.list[0].pop,
+      data: data.list,
     });
   };
   return { forecast, getForecast };
