@@ -17,15 +17,7 @@ export default function ForecastFiveDays({ forecast }) {
 
           return (
             <React.Fragment key={index}>
-              {dayTransition && (
-                <div className="flex flex-col items-center justify-center h-full">
-                  {item.sys.pod === "d" ? (
-                    <GiSunrise className="text-4xl" />
-                  ) : (
-                    <GiSunset className="text-4xl" />
-                  )}
-                </div>
-              )}
+              
 
               <div className="flex flex-col justify-around items-center h-full">
                 <span>
@@ -42,6 +34,16 @@ export default function ForecastFiveDays({ forecast }) {
                 </span>
                 <span className="mt-auto">{Math.round(item.main.temp)}º</span>
               </div>
+              
+              {dayTransition && (
+                <div className="flex flex-col items-center justify-center h-full">
+                  {item.sys.pod === "d" ? (
+                    <GiSunrise className="text-4xl" />
+                  ) : (
+                    <GiSunset className="text-4xl" />
+                  )}
+                </div>
+              )}
             </React.Fragment>
           );
         })}
