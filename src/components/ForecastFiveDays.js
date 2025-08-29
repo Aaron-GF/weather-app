@@ -8,18 +8,19 @@ export default function ForecastFiveDays({ forecast }) {
     <div className="flex flex-col gap-1.5 col-span-2 row-span-1 glass-effect p-3">
       <h3 className="info-head">
         <HiCalendarDays className="text-xl" />
-        5-DAY FORECAST
+        5-DAY FORECAST (EVERY 3 HOURS)
       </h3>
-      <div className="flex gap-6 overflow-x-scroll scrollbar-overlay items-center justify-evenly h-full bg-gray-700 rounded-xl px-3 py-2">
+      <div className="flex gap-6 overflow-x-scroll scrollbar items-center justify-evenly h-full bg-gray-700 rounded-xl px-3 py-2">
         {forecast.data.map((item, index, array) => {
           const dayTransition =
-            index > 0 && array[index - 1].sys.pod !== item.sys.pod;
+            index > 0 && array[index - 1].sys.pod !== item.sys.pod; // check when the day changes
 
           return (
             <React.Fragment key={index}>
-              
-
+              {" "}
+              {/* need to put key */}
               <div className="flex flex-col justify-around items-center h-full">
+                {/* mark the current moment */}
                 <span>
                   {index === 0 ? "Now" : new Date(item.dt_txt).getHours()}
                 </span>
@@ -29,12 +30,20 @@ export default function ForecastFiveDays({ forecast }) {
                     className="drop-shadow-md/30"
                   />
                 </figure>
-                <span className="text-sky-400 text-xs">
-                  {item.pop ? `${Math.round(item.pop * 100)}%` : ""}
-                </span>
-                <span className="mt-auto">{Math.round(item.main.temp)}º</span>
+
+                {/* if there is show rain probability */}
+                {item.pop ? (
+                  <span className="text-sky-400 text-xs">
+                    {Math.round(item.pop * 100)}%
+                  </span>
+                ) : (
+                  <span className="opacity-0">-</span>
+                )}
+
+                <span>{Math.round(item.main.temp)}º</span>
               </div>
-              
+
+              {/* show sunrise or sunset when there is transition */}
               {dayTransition && (
                 <div className="flex flex-col items-center justify-center h-full">
                   {item.sys.pod === "d" ? (

@@ -7,7 +7,8 @@
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-A weather application built with **Next.js**, **React**, **TailwindCSS**. It allows you to check the **current weather** in your location or any city/place you search for.  
+A weather application built with **Next.js**, **React**, **TailwindCSS**. It allows you to check the **current weather** in your location or any city/place you search for. Background changes according to the weather to improve user experience. Design is inspired by the Apple app.
+ 
 The app displays detailed information such as:  
 - Temperature 🌡️  
 - Feels like temperature 🤔  
