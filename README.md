@@ -51,6 +51,7 @@ The app will be available at http://localhost:3000.
 ## 🌐 Demo
 
 👉 [Live demo on Vercel](https://weather-app-twister.vercel.app/)
+https://weather-app-twister.vercel.app/
 
 
 ## 📄 License
