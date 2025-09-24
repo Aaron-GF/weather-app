@@ -59,6 +59,6 @@ This project is part of my personal portfolio.
 Feel free to explore the code, but do not present it as your own.
 
 
-[Tarea de Roadmap]([https://url-de-la-tarea.co](https://roadmap.sh/projects/weather-app)
+[Tarea de Roadmap](https://roadmap.sh/projects/weather-app)
 
 
